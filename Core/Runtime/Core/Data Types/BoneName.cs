@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using System;
+using UnityEngine;
 
 namespace Hairibar.Ragdoll
 {
@@ -6,7 +7,7 @@ namespace Hairibar.Ragdoll
     /// Wrapper around a string that holds the name of a bone.
     /// </summary>
     [System.Serializable]
-    public struct BoneName
+    public struct BoneName: IEquatable<BoneName>
     {
         [SerializeField]
         string name;
@@ -36,6 +37,14 @@ namespace Hairibar.Ragdoll
         public static bool operator !=(BoneName a, BoneName b)
         {
             return !(a == b);
+        }
+        
+        public bool Equals(BoneName other)
+        {
+            if (other == null)
+                return false;
+
+            return this.name == other.name;
         }
 
         public override bool Equals(object obj)
