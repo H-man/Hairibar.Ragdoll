@@ -91,8 +91,8 @@ namespace Hairibar.Ragdoll
         RagdollBone GetCollidingBone(Collision collision)
         {
             Rigidbody rigidbody = collision.GetContact(0).thisCollider.attachedRigidbody;
-            RagdollBone bone = bones[rigidbody];
-            return bone;
+            if (bones.TryGetValue(rigidbody, out var value)) return value;
+            return null;
         }
 
 
